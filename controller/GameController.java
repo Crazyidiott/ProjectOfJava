@@ -207,6 +207,7 @@ public class GameController{
             statusPanel.setModeText("Cheat");
             statusPanel.isCheating();
             PossibleMoves=null;
+            gamePanel.clear();
         }
         else{
             statusPanel.setModeText("Normal");
@@ -227,6 +228,13 @@ public class GameController{
                     statusPanel.setPlayerText(currentPlayer.name());
                     PossibleMoves=ChessPiece.DARK_GRAY;
                     choosePlayerFrame.dispose();
+
+                    if(!gamePanel.haveSpace(currentPlayer,PossibleMoves)){
+                        currentPlayer=currentPlayer.next();
+                        PossibleMoves=PossibleMoves.next();
+                        statusPanel.setPlayerText(currentPlayer.name());
+                    }
+                    gamePanel.repaint();
                 });
                 choosePlayerFrame.add(blackBtn);
 
@@ -238,16 +246,18 @@ public class GameController{
                     statusPanel.setPlayerText(currentPlayer.name());
                     PossibleMoves=ChessPiece.LIGHT_GRAY;
                     choosePlayerFrame.dispose();
+
+                    if(!gamePanel.haveSpace(currentPlayer,PossibleMoves)){
+                        currentPlayer=currentPlayer.next();
+                        PossibleMoves=PossibleMoves.next();
+                        statusPanel.setPlayerText(currentPlayer.name());
+                    }
+                    gamePanel.repaint();
                 });
                 choosePlayerFrame.add(whiteBtn);
 
                 choosePlayerFrame.setVisible(true);
 
-                if(!gamePanel.haveSpace(currentPlayer,PossibleMoves)){
-                    currentPlayer=currentPlayer.next();
-                    PossibleMoves=PossibleMoves.next();
-                    statusPanel.setPlayerText(currentPlayer.name());
-                }
                 countScore();
                 statusPanel.setScoreText(blackScore,whiteScore);
             }

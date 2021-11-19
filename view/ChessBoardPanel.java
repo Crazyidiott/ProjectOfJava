@@ -153,8 +153,7 @@ public class ChessBoardPanel extends JPanel{//继承
         for(int i=0;i<CHESS_COUNT;i++)
             for(int j=0;j<CHESS_COUNT;j++)
             {
-                if(chessGrids[i][j].getChessPiece()==null)
-                    chessGrids[i][j].setChessPiece(null);
+                chessGrids[i][j].setChessPiece(chessGrids[i][j].getChessPiece());
                 if(canClickGrid(i, j, currentPlayer))
                 {
                     flag=true;
@@ -180,5 +179,12 @@ public class ChessBoardPanel extends JPanel{//继承
             black++;
         }
         chessGrids[row][col].repaint();
+    }
+
+    public void clear(){
+        for(int i=0;i<CHESS_COUNT;i++)
+            for(int j=0;j<CHESS_COUNT;j++)
+                chessGrids[i][j].setChessPiece(chessGrids[i][j].getChessPiece());
+        repaint();
     }
 }

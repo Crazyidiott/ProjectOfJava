@@ -59,9 +59,14 @@ public class ChessGridComponent extends BasicComponent{
     public void drawPiece(Graphics g){//填充
         g.setColor(gridColor);
         g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
-        if (this.chessPiece != null) {
+        if (getChessPiece() != null) {
             g.setColor(chessPiece.getColor());
             g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);//圆形棋子
+        }
+        else if(this.chessPiece!=null){
+            g.setColor(chessPiece.getColor());
+            for(int i=0;i<5;i++)
+                g.drawOval((gridSize-chessSize)/2+i,(gridSize-chessSize)/2+i,chessSize-i*2,chessSize-i*2);
         }
     }
 

@@ -25,16 +25,17 @@ public class ChessGridComponent extends BasicComponent{
     @Override
     public void onMouseClicked(){//被点击
         System.out.printf("%s clicked (%d, %d)\n", GameFrame.controller.getCurrentPlayer(), row, col);
+        if(getChessPiece()!=null)
+            return;
         if(GameFrame.controller.isCheating())
         {
             GameFrame.controller.cheatOn(row,col);
+            GameFrame.controller.swapPlayer();
         }
-        else{
-            if(GameFrame.controller.canClick(row, col))
-            {
-                GameFrame.controller.change(row, col);
-                GameFrame.controller.swapPlayer();
-            }
+        else if(GameFrame.controller.canClick(row, col))
+        {
+            GameFrame.controller.change(row, col);
+            GameFrame.controller.swapPlayer();
         }
     }
 

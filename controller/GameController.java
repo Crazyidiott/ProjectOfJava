@@ -4,9 +4,12 @@ import model.ChessPiece;
 import view.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 
 public class GameController{
@@ -105,6 +108,11 @@ public class GameController{
     }
 
     public void readFileData(String fileName) {
+        if(fileName.length()<5||!fileName.substring(fileName.length() - 4).equals(".txt"))
+        {
+            wrong_File(104);
+            return;
+        }
         List<String> fileData = new ArrayList<>();
         process = new ArrayList<String>();
         try {
@@ -126,16 +134,21 @@ public class GameController{
         currentPlayer=ChessPiece.BLACK;
         PossibleMoves=ChessPiece.DARK_GRAY;
 
-        int n=fileData.get(0).charAt(0)-33;
-        if(n!=fileData.size()-1){
-            wrong_File();
+        int n=fileData.get(9).charAt(0)-33;
+        if(n!=fileData.size()-10){
+            wrong_File(106);
+            return;
+        }
+        if(n==60)
+        {
+            wrong_File(102);
             return;
         }
         char mode;
         int x,y;
-        for(int i=1;i<=n;i++){
+        for(int i=10;i<=n+9;i++){
             if(fileData.get(i).length()!=3||(fileData.get(i).charAt(0)!='C'&&fileData.get(i).charAt(0)!='N')||fileData.get(i).charAt(1)<'0'||fileData.get(i).charAt(1)>'7'||fileData.get(i).charAt(2)<'0'||fileData.get(i).charAt(2)>'7'){
-                wrong_File();
+                wrong_File(105);
                 return;
             }
             mode=fileData.get(i).charAt(0);
@@ -145,7 +158,7 @@ public class GameController{
             {
                 if(!canClick(x, y))
                 {
-                    wrong_File();
+                    wrong_File(105);
                     return;
                 }
                 change(x,y);
@@ -155,19 +168,92 @@ public class GameController{
                 cheatOn(x,y);
             }
         }
+
+        String str;
+        for(int i=0;i<8;i++)
+        {
+            if(fileData.get(i).length()!=24)
+            {
+                wrong_File(101);
+                return;
+            }
+            for(int j=0;j<8;j++)
+            {
+                str=fileData.get(i).substring(j*3,j*3+3);
+                if(str.equals("   "))
+                {
+                    wrong_File(101);
+                    return;
+                }
+                if(!str.equals("  0") && !str.equals("  1") && !str.equals(" -1"))
+                {
+                    wrong_File(102);
+                    return;
+                }
+            }
+        }
+        str=fileData.get(8);
+        if(!str.equals("1") && !str.equals("-1"))
+        {
+            wrong_File(103);
+            return;
+        }
+        if((currentPlayer==ChessPiece.BLACK&&!str.equals("1"))||(currentPlayer==ChessPiece.WHITE&&!str.equals("-1")))
+        {
+            wrong_File(107);
+            return;
+        }
+        str="";
+        for(int i=0;i<8;i++)
+            str=str+fileData.get(i)+"\n";
+        if(!str.equals(gamePanel.toString()))
+        {
+            wrong_File(107);
+            return;
+        }
     }
 
-    private void wrong_File(){
-        System.out.println("Wrong");
+    private void wrong_File(int wrongNum){
+        System.out.println("Wrong"+wrongNum);
         reStart();
         JFrame wrongFileFrame = new JFrame();
-        wrongFileFrame.setTitle("The file is incorrect");
+        wrongFileFrame.setTitle("错误编码："+wrongNum);
         wrongFileFrame.setLayout(null);
-        wrongFileFrame.setSize(200,100);
+        wrongFileFrame.setSize(400,200);
         wrongFileFrame.setLocationRelativeTo(null);
+
+        JLabel wrongLabel=new JLabel();
+        wrongLabel.setLocation(50,10);
+        wrongLabel.setSize(300,80);
+        wrongLabel.setFont(new Font("Calibri",Font.ITALIC,15));
+        switch (wrongNum){
+            case 101:
+                wrongLabel.setText("棋盘并非8*8");
+                break;
+            case 102:
+                wrongLabel.setText("棋子错误");
+                break;
+            case 103:
+                wrongLabel.setText("缺少行棋方");
+                break;
+            case 104:
+                wrongLabel.setText("文件格式错误");
+                break;
+            case 105:
+                wrongLabel.setText("非法落子，存在不合法的步骤");
+                break;
+            case 106:
+                wrongLabel.setText("其他错误");
+                break;
+            case 107:
+                wrongLabel.setText("先前步骤与棋盘不匹配");
+                break;
+        }
+        wrongFileFrame.add(wrongLabel);
+
         JButton OK=new JButton("OK");
         OK.setSize(100,50);
-        OK.setLocation(50,10);
+        OK.setLocation(150,100);
         wrongFileFrame.add(OK);
         OK.addActionListener(e->{
             wrongFileFrame.dispose();
@@ -181,6 +267,11 @@ public class GameController{
         {
             FileWriter fileWriter=new FileWriter(fileName);
             BufferedWriter bufferedWriter=new BufferedWriter(fileWriter);
+            bufferedWriter.write(gamePanel.toString());
+            if(currentPlayer==ChessPiece.BLACK)
+                bufferedWriter.write("1\n");
+            else
+                bufferedWriter.write("-1\n");
             bufferedWriter.write((char)(process.size()+33)+"\n");
             for(String toWrite : process){
                 bufferedWriter.write(toWrite);
@@ -202,6 +293,16 @@ public class GameController{
     }
 
     public void changeMode(){
+        isCheat=!isCheat;
+        if(isCheat){
+            statusPanel.setModeText("Cheat");
+        }
+        else{
+            statusPanel.setModeText("Normal");
+        }
+    }
+
+    /*public void changeMode(){
         isCheat=!isCheat;
         if(isCheat){
             statusPanel.setModeText("Cheat");
@@ -262,10 +363,10 @@ public class GameController{
                 statusPanel.setScoreText(blackScore,whiteScore);
             }
         }
-    }
+    }*/
 
     public void cheatOn(int row,int col){
-        gamePanel.cheatOn(row,col);
+        gamePanel.cheatOn(row,col,currentPlayer);
         process.add("C"+row+col+"\n");
     }
 

@@ -48,7 +48,7 @@ public class GameFrame extends JFrame{
         loadGameBtn.addActionListener(e -> {
             System.out.println("clicked Load Btn");
             String filePath = JOptionPane.showInputDialog(this, "input the path here");
-            controller.readFileData(filePath+".txt");
+            controller.readFileData(filePath);
         });
 
         JButton saveGameBtn = new JButton("Save");//创建一个保存按钮
@@ -58,7 +58,7 @@ public class GameFrame extends JFrame{
         saveGameBtn.addActionListener(e -> {
             System.out.println("clicked Save Btn");
             String filePath = JOptionPane.showInputDialog(this, "input the path here");
-            controller.writeDataToFile(filePath+".txt");
+            controller.writeDataToFile(filePath);
         });
 
         JButton changeModeBtn=new JButton("Normal/Cheat");

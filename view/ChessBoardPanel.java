@@ -103,6 +103,7 @@ public class ChessBoardPanel extends JPanel{//继承
     }
 
     public void change(int row,int col,ChessPiece currentPlayer){
+        System.out.println(1);
         int k;
         boolean flag;
         for(int i=-1;i<=1;i++)
@@ -132,7 +133,7 @@ public class ChessBoardPanel extends JPanel{//继承
                 if(flag)
                 {
                     black += currentPlayer == ChessPiece.BLACK ? k - 1 : 1 - k;
-                    white += currentPlayer == ChessPiece.WHITE ? k - 1: 1 - k;
+                    white += currentPlayer == ChessPiece.WHITE ? k - 1 : 1 - k;
                 }
                 while(flag&&(--k)>0){
                     chessGrids[row+k*i][col+k*j].setChessPiece(currentPlayer);
@@ -164,7 +165,22 @@ public class ChessBoardPanel extends JPanel{//继承
         return flag;
     }
 
-    public void cheatOn(int row,int col){
+    public void cheatOn(int row,int col,ChessPiece currentPlayer){
+        if(canClickGrid(row,col,currentPlayer))
+            change(row,col,currentPlayer);
+        else
+        {
+            System.out.println(2);
+            chessGrids[row][col].setChessPiece(currentPlayer);
+            if(currentPlayer==ChessPiece.WHITE)
+                white++;
+            else
+                black++;
+            chessGrids[row][col].repaint();
+        }
+    }
+
+/*    public void cheatOnfalse(int row,int col){
         if(chessGrids[row][col].getChessPiece()==ChessPiece.BLACK){
             chessGrids[row][col].setChessPiece(ChessPiece.WHITE);
             black--;
@@ -179,12 +195,32 @@ public class ChessBoardPanel extends JPanel{//继承
             black++;
         }
         chessGrids[row][col].repaint();
-    }
+    }*/
 
     public void clear(){
         for(int i=0;i<CHESS_COUNT;i++)
             for(int j=0;j<CHESS_COUNT;j++)
                 chessGrids[i][j].setChessPiece(chessGrids[i][j].getChessPiece());
         repaint();
+    }
+
+    @Override
+    public String toString()
+    {
+        String ret="";
+        for(int i = 0; i < CHESS_COUNT; i++)
+        {
+            for(int j = 0; j < CHESS_COUNT; j++)
+            {
+                if(chessGrids[i][j].getChessPiece()==ChessPiece.BLACK)
+                    ret=ret+"  1";
+                else if(chessGrids[i][j].getChessPiece()==ChessPiece.WHITE)
+                    ret=ret+" -1";
+                else
+                    ret=ret+"  0";
+            }
+            ret=ret+"\n";
+        }
+        return ret;
     }
 }

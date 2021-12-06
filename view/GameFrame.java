@@ -66,8 +66,8 @@ public class GameFrame extends JFrame{
         changeModeBtn.setLocation(saveGameBtn.getX()+restartBtn.getWidth()+30,restartBtn.getY());
         add(changeModeBtn);
         changeModeBtn.addActionListener(e ->{
-            System.out.println("someone is cheating!");
             controller.changeMode();
+            if(controller.isCheating()){System.out.println("someone is cheating!");}
         });
 
         this.setVisible(true);

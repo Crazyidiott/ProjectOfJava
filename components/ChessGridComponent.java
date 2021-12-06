@@ -61,14 +61,28 @@ public class ChessGridComponent extends BasicComponent{
         g.setColor(gridColor);
         g.fillRect(1, 1, this.getWidth() - 2, this.getHeight() - 2);
         if (getChessPiece() != null) {
-            g.setColor(chessPiece.getColor());
-            g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);//圆形棋子
+//            g.setColor(chessPiece.getColor());
+//            g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);//圆形棋子
+              if(chessPiece.getColor() == Color.BLACK){
+                   g.drawImage(ImageValue.blackImage,(gridSize - chessSize) / 2,(gridSize - chessSize) / 2,chessSize,chessSize,null);
+              }
+              if(chessPiece.getColor()==Color.WHITE){
+                  g.drawImage(ImageValue.whiteImage,(gridSize - chessSize) / 2,(gridSize - chessSize) / 2,chessSize,chessSize,null);
+              }
+
         }
         else if(this.chessPiece!=null){
             g.setColor(chessPiece.getColor());
-            for(int i=0;i<5;i++)
-                g.drawOval((gridSize-chessSize)/2+i,(gridSize-chessSize)/2+i,chessSize-i*2,chessSize-i*2);
-        }
+            for (int i = 0; i < 5; i++) {
+                g.drawArc((gridSize - chessSize) / 2 + i, (gridSize - chessSize) / 2 + i, chessSize - i * 2, chessSize - i * 2, -30, 60);
+                g.drawArc((gridSize - chessSize) / 2 + i, (gridSize - chessSize) / 2 + i, chessSize - i * 2, chessSize - i * 2, 60, 60);
+                g.drawArc((gridSize - chessSize) / 2 + i, (gridSize - chessSize) / 2 + i, chessSize - i * 2, chessSize - i * 2, 150, 60);
+                g.drawArc((gridSize - chessSize) / 2 + i, (gridSize - chessSize) / 2 + i, chessSize - i * 2, chessSize - i * 2, 240, 60);
+            }
+//            for(int i=0;i<5;i++) {
+//                g.drawOval((gridSize - chessSize) / 2 + i, (gridSize - chessSize) / 2 + i, chessSize - i * 2, chessSize - i * 2);
+//            }
+            }
     }
 
     @Override//重构

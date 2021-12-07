@@ -34,7 +34,7 @@ public class GameFrame extends JFrame{
 
         JButton restartBtn = new JButton("Restart");//创建一个重新开始按钮
         restartBtn.setSize(120, 50);
-        restartBtn.setLocation((this.getWidth() - chessBoardPanel.getWidth()) / 2, (this.getHeight() + chessBoardPanel.getHeight()) / 2);
+        restartBtn.setLocation((this.getWidth() - chessBoardPanel.getWidth()) / 2-60, (this.getHeight() + chessBoardPanel.getHeight()) / 2);
         add(restartBtn);
         restartBtn.addActionListener(e -> {
             controller.reStart();
@@ -42,8 +42,8 @@ public class GameFrame extends JFrame{
         });
 
         JButton loadGameBtn = new JButton("Load");//创建一个读入按钮
-        loadGameBtn.setSize(120, 50);
-        loadGameBtn.setLocation(restartBtn.getX()+restartBtn.getWidth()+30, restartBtn.getY());
+        loadGameBtn.setSize( 120,50);
+        loadGameBtn.setLocation(restartBtn.getX()+restartBtn.getWidth()+20, restartBtn.getY());
         add(loadGameBtn);
         loadGameBtn.addActionListener(e -> {
             System.out.println("clicked Load Btn");
@@ -53,7 +53,7 @@ public class GameFrame extends JFrame{
 
         JButton saveGameBtn = new JButton("Save");//创建一个保存按钮
         saveGameBtn.setSize(120, 50);
-        saveGameBtn.setLocation(loadGameBtn.getX()+restartBtn.getWidth()+30, restartBtn.getY());
+        saveGameBtn.setLocation(loadGameBtn.getX()+loadGameBtn.getWidth()+20, restartBtn.getY());
         add(saveGameBtn);
         saveGameBtn.addActionListener(e -> {
             System.out.println("clicked Save Btn");
@@ -61,13 +61,22 @@ public class GameFrame extends JFrame{
             controller.writeDataToFile(filePath);
         });
 
+        JButton undoBtn=new JButton("Undo operation");
+        undoBtn.setSize(120,50);
+        undoBtn.setLocation(saveGameBtn.getX()+saveGameBtn.getWidth()+20,restartBtn.getY());
+        add(undoBtn);
+        undoBtn.addActionListener(e -> {
+            System.out.println("click undo button");
+            controller.getUndo();
+        });
+
         JButton changeModeBtn=new JButton("Normal/Cheat");
         changeModeBtn.setSize(120,50);
-        changeModeBtn.setLocation(saveGameBtn.getX()+restartBtn.getWidth()+30,restartBtn.getY());
+        changeModeBtn.setLocation(undoBtn.getX()+undoBtn.getWidth()+20,restartBtn.getY());
         add(changeModeBtn);
         changeModeBtn.addActionListener(e ->{
+            System.out.println("someone is cheating!");
             controller.changeMode();
-            if(controller.isCheating()){System.out.println("someone is cheating!");}
         });
 
         this.setVisible(true);

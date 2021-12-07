@@ -32,7 +32,7 @@ public class GameController{
 
     }
 
-    public void reStart(){
+    public void restartBoard(){
         gamePanel.initialGame();
         gamePanel.repaint();
 
@@ -44,11 +44,14 @@ public class GameController{
         blackScore=gamePanel.getblack();
         whiteScore=gamePanel.getwhite();
 
-        process=new ArrayList<String>();
-
         isCheat=false;
 
         PossibleMoves=ChessPiece.DARK_GRAY;
+    }
+
+    public void reStart(){
+        restartBoard();
+        process=new ArrayList<String>();
     }
 
     public void swapPlayer(){//交换操作
@@ -164,8 +167,9 @@ public class GameController{
                 change(x,y);
                 swapPlayer();
             }
-            else{
+            else if(mode=='C'){
                 cheatOn(x,y);
+                swapPlayer();
             }
         }
 
@@ -368,6 +372,27 @@ public class GameController{
     public void cheatOn(int row,int col){
         gamePanel.cheatOn(row,col,currentPlayer);
         process.add("C"+row+col+"\n");
+    }
+
+    public void getUndo(){
+        restartBoard();
+        process.remove(process.size()-1);
+        char mode;
+        int x,y;
+        for(int i=0;i<process.size();i++){
+            mode=process.get(i).charAt(0);
+            x=process.get(i).charAt(1)-'0';
+            y=process.get(i).charAt(2)-'0';
+            if(mode=='N')
+            {
+                gamePanel.change(x,y,currentPlayer);
+                swapPlayer();
+            }
+            else if(mode=='C'){
+                gamePanel.cheatOn(x,y,currentPlayer);
+                swapPlayer();
+            }
+        }
     }
 
 }

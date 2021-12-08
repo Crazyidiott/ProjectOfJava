@@ -5,13 +5,18 @@ import controller.GameController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame{
     public static GameController controller;
     private ChessBoardPanel chessBoardPanel;
     private StatusPanel statusPanel;
+    private MenuFrame menuFrame;
 
-    public GameFrame(int frameSize){
+    public GameFrame(int frameSize,MenuFrame menuFrame){
+        this.menuFrame=menuFrame;
+
         this.setTitle("2021F CS102A Project Reversi");//标题
         this.setLayout(null);//设置格式布局（清空布局）
 
@@ -79,8 +84,32 @@ public class GameFrame extends JFrame{
             controller.changeMode();
         });
 
-        this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//点击关闭时关闭
+        JButton menuBtn=new JButton("<- Back to Menu");
+        menuBtn.setSize(120,50);
+        menuBtn.setLocation(0,20);
+        add(menuBtn);
+        menuBtn.addActionListener(e -> {
+            System.out.println("Click Menu Button");
+            this.menuFrame.setVisible(true);
+            this.setVisible(false);
+        });
 
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//点击关闭时关闭
+        this.addWindowListener(
+                new WindowAdapter()
+                {
+                    public void windowClosing(WindowEvent e)
+                    {
+                        setVisible(false);
+                        menuFrame.close();
+                    }
+                });
+    }
+
+    public void close(){
+        SecurityManager security = System.getSecurityManager();
+        if (security != null) {
+            security.checkExit(0);
+        }
     }
 }

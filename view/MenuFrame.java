@@ -25,6 +25,7 @@ public class MenuFrame extends JFrame
         normalModeBtn.setLocation(340,300);
         add(normalModeBtn);
         normalModeBtn.addActionListener(e -> {
+            GameFrame.controller.reStart();
             gameFrame.setVisible(true);
             this.setVisible(false);
         });

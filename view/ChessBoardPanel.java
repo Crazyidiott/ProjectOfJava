@@ -60,7 +60,7 @@ public class ChessBoardPanel extends JPanel{//继承
 
     @Override
     protected void paintComponent(Graphics g){//重构画棋
-        super.paintComponent(g);
+        super. paintComponent(g);
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
     }
@@ -197,6 +197,7 @@ public class ChessBoardPanel extends JPanel{//继承
         chessGrids[row][col].repaint();
     }*/
 
+    //TODO 这个是干嘛的？
     public void clear(){
         for(int i=0;i<CHESS_COUNT;i++)
             for(int j=0;j<CHESS_COUNT;j++)
@@ -205,6 +206,7 @@ public class ChessBoardPanel extends JPanel{//继承
     }
 
     @Override
+    //以1，-1, 0 表示棋盘
     public String toString()
     {
         String ret="";

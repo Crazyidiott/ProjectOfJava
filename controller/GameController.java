@@ -324,7 +324,6 @@ public class GameController{
                 choosePlayerFrame.setLayout(null);
                 choosePlayerFrame.setSize(400,200);
                 choosePlayerFrame.setLocationRelativeTo(null);
-
                 JButton blackBtn=new JButton("BLACK");
                 blackBtn.setSize(100,50);
                 blackBtn.setLocation(50,50);
@@ -333,7 +332,6 @@ public class GameController{
                     statusPanel.setPlayerText(currentPlayer.name());
                     PossibleMoves=ChessPiece.DARK_GRAY;
                     choosePlayerFrame.dispose();
-
                     if(!gamePanel.haveSpace(currentPlayer,PossibleMoves)){
                         currentPlayer=currentPlayer.next();
                         PossibleMoves=PossibleMoves.next();
@@ -342,7 +340,6 @@ public class GameController{
                     gamePanel.repaint();
                 });
                 choosePlayerFrame.add(blackBtn);
-
                 JButton whiteBtn=new JButton("WHITE");
                 whiteBtn.setSize(100,50);
                 whiteBtn.setLocation(250,50);
@@ -351,7 +348,6 @@ public class GameController{
                     statusPanel.setPlayerText(currentPlayer.name());
                     PossibleMoves=ChessPiece.LIGHT_GRAY;
                     choosePlayerFrame.dispose();
-
                     if(!gamePanel.haveSpace(currentPlayer,PossibleMoves)){
                         currentPlayer=currentPlayer.next();
                         PossibleMoves=PossibleMoves.next();
@@ -360,9 +356,7 @@ public class GameController{
                     gamePanel.repaint();
                 });
                 choosePlayerFrame.add(whiteBtn);
-
                 choosePlayerFrame.setVisible(true);
-
                 countScore();
                 statusPanel.setScoreText(blackScore,whiteScore);
             }
@@ -396,3 +390,7 @@ public class GameController{
     }
 
 }
+
+
+
+

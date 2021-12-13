@@ -3,6 +3,8 @@ package model;//棋子颜色
 import java.awt.*;
 
 public enum ChessPiece{//枚举类
+
+
     BLACK(Color.BLACK), DARK_GRAY(Color.DARK_GRAY),WHITE(Color.WHITE),LIGHT_GRAY(Color.LIGHT_GRAY);
 
     private final Color color;

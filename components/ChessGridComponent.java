@@ -10,7 +10,7 @@ import java.awt.*;
 public class ChessGridComponent extends BasicComponent{
     public static int chessSize;//棋子大小
     public static int gridSize;//格子大小
-    public static Color gridColor = new Color(255, 150, 50);
+    public static Color gridColor = new Color(243, 163, 66);
     private ChessPiece chessPiece;
     private int row;//位置
     private int col;//位置
@@ -39,6 +39,8 @@ public class ChessGridComponent extends BasicComponent{
         }
     }
 
+    public void onMousePressed(){}
+
     public ChessPiece getChessPiece(){
         if(chessPiece==ChessPiece.BLACK||chessPiece==ChessPiece.WHITE)
             return chessPiece;
@@ -64,9 +66,16 @@ public class ChessGridComponent extends BasicComponent{
 //            g.setColor(chessPiece.getColor());
 //            g.fillOval((gridSize - chessSize) / 2, (gridSize - chessSize) / 2, chessSize, chessSize);//圆形棋子
               if(chessPiece.getColor() == Color.BLACK){
+                  long starttime = System.currentTimeMillis();
+                  long end  = starttime + 30;
+                  //todo test the time
+//                  while(System.currentTimeMillis()<end){
+//                      System.out.println("kk");
+//                  }
                    g.drawImage(ImageValue.blackImage,(gridSize - chessSize) / 2,(gridSize - chessSize) / 2,chessSize,chessSize,null);
               }
               if(chessPiece.getColor()==Color.WHITE){
+
                   g.drawImage(ImageValue.whiteImage,(gridSize - chessSize) / 2,(gridSize - chessSize) / 2,chessSize,chessSize,null);
               }
 

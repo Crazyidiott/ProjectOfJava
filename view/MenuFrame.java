@@ -24,33 +24,32 @@ public class MenuFrame extends JFrame {
 
         this.setLocationRelativeTo(null);
 
-        JButton normalModeBtn=new JButton();
+        JButton playButton=new JButton();
 //        normalModeBtn.setText("Normal Mode");
-        normalModeBtn.setOpaque(false);
-        normalModeBtn.setContentAreaFilled(false);
-        normalModeBtn.setFocusPainted(false);
-        normalModeBtn.setBorder(null);
+//        playButton.setOpaque(false);
+        playButton.setContentAreaFilled(false);
+        playButton.setFocusPainted(false);
+        playButton.setBorder(null);
         //the order cannot be changed here
-        normalModeBtn.setSize(this.getFramesize()*2/5,this.getFramesize()/5);
-        setIcon(ImageValue.playButtonup,normalModeBtn);
-        normalModeBtn.setLocation((this.getFramesize()-(normalModeBtn.getWidth()))/2,(this.getFramesize()-normalModeBtn.getHeight())/5);
-        this.add(normalModeBtn);
-        normalModeBtn.addMouseListener(new MouseAdapter() {
+        playButton.setSize(this.getFramesize()*2/5,this.getFramesize()/5);
+        setIcon(ImageValue.playButtonup,playButton);
+        playButton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())/5);
+        this.add(playButton);
+        playButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
 //                System.out.println("233");
-                setIcon(ImageValue.playButtondown,normalModeBtn);
+                setIcon(ImageValue.playButtondown,playButton);
             }
-
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-                setIcon(ImageValue.playButtonup,normalModeBtn);
+                setIcon(ImageValue.playButtonup,playButton);
             }
         });
 
-        normalModeBtn.addActionListener(e -> {
+        playButton.addActionListener(e -> {
             GameFrame.controller.reStart();
             gameFrame.setVisible(true);
             this.setVisible(false);

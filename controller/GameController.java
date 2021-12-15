@@ -129,6 +129,7 @@ public class GameController{
             fileReader.close();
             fileData.forEach(System.out::println);
         } catch (IOException e) {
+            wrong_File(106);
             e.printStackTrace();
         }
 
@@ -226,49 +227,74 @@ public class GameController{
     private void wrong_File(int wrongNum){
         System.out.println("Wrong"+wrongNum);
         reStart();
-        JFrame wrongFileFrame = new JFrame();
-        wrongFileFrame.setTitle("错误编码："+wrongNum);
-        wrongFileFrame.setLayout(null);
-        wrongFileFrame.setSize(400,200);
-        wrongFileFrame.setLocationRelativeTo(null);
+//        JFrame wrongFileFrame = new JFrame();
+//        wrongFileFrame.setTitle("错误编码："+wrongNum);
+//        wrongFileFrame.setLayout(null);
+//        wrongFileFrame.setSize(400,200);
+//        wrongFileFrame.setLocationRelativeTo(null);
+//
+//        JLabel wrongLabel=new JLabel();
+//        wrongLabel.setLocation(50,10);
+//        wrongLabel.setSize(300,80);
+//        wrongLabel.setFont(new Font("Calibri",Font.ITALIC,15));
 
-        JLabel wrongLabel=new JLabel();
-        wrongLabel.setLocation(50,10);
-        wrongLabel.setSize(300,80);
-        wrongLabel.setFont(new Font("Calibri",Font.ITALIC,15));
         switch (wrongNum){
             case 101:
-                wrongLabel.setText("棋盘并非8*8");
+                JOptionPane.showMessageDialog(this.gamePanel,"棋盘并非8*8","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 102:
-                wrongLabel.setText("棋子错误");
+                JOptionPane.showMessageDialog(this.gamePanel,"棋子错误","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 103:
-                wrongLabel.setText("缺少行棋方");
+                JOptionPane.showMessageDialog(this.gamePanel,"缺少行棋方或行棋方棋子错误","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 104:
-                wrongLabel.setText("文件格式错误");
+                JOptionPane.showMessageDialog(this.gamePanel,"文件格式错误","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 105:
-                wrongLabel.setText("非法落子，存在不合法的步骤");
+                JOptionPane.showMessageDialog(this.gamePanel,"非法落子，存在不合法的步骤","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 106:
-                wrongLabel.setText("其他错误");
+                JOptionPane.showMessageDialog(this.gamePanel,"其他错误","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
             case 107:
-                wrongLabel.setText("先前步骤与棋盘不匹配");
+                JOptionPane.showMessageDialog(this.gamePanel,"先前步骤与棋盘不匹配","错误编码: "+wrongNum,JOptionPane.WARNING_MESSAGE);
                 break;
         }
-        wrongFileFrame.add(wrongLabel);
 
-        JButton OK=new JButton("OK");
-        OK.setSize(100,50);
-        OK.setLocation(150,100);
-        wrongFileFrame.add(OK);
-        OK.addActionListener(e->{
-            wrongFileFrame.dispose();
-        });
-        wrongFileFrame.setVisible(true);
+//        switch (wrongNum){
+//            case 101:
+//                wrongLabel.setText("棋盘并非8*8");
+//                break;
+//            case 102:
+//                wrongLabel.setText("棋子错误");
+//                break;
+//            case 103:
+//                wrongLabel.setText("缺少行棋方");
+//                break;
+//            case 104:
+//                wrongLabel.setText("文件格式错误");
+//                break;
+//            case 105:
+//                wrongLabel.setText("非法落子，存在不合法的步骤");
+//                break;
+//            case 106:
+//                wrongLabel.setText("其他错误");
+//                break;
+//            case 107:
+//                wrongLabel.setText("先前步骤与棋盘不匹配");
+//                break;
+//        }
+//        wrongFileFrame.add(wrongLabel);
+//
+//        JButton OK=new JButton("OK");
+//        OK.setSize(100,50);
+//        OK.setLocation(150,100);
+//        wrongFileFrame.add(OK);
+//        OK.addActionListener(e->{
+//            wrongFileFrame.dispose();
+//        });
+//        wrongFileFrame.setVisible(true);
 
     }//*会刷新当前棋盘
 
@@ -396,7 +422,6 @@ public class GameController{
     }
 
 }
-
 
 
 

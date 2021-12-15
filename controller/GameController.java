@@ -137,6 +137,37 @@ public class GameController{
         currentPlayer=ChessPiece.BLACK;
         PossibleMoves=ChessPiece.DARK_GRAY;
 
+        String str;
+        for(int i=0;i<8;i++)
+        {
+            if(fileData.get(i).length()!=24)
+            {
+                wrong_File(101);
+                return;
+            }
+            for(int j=0;j<8;j++)
+            {
+                str=fileData.get(i).substring(j*3,j*3+3);
+                if(str.equals("   "))
+                {
+                    wrong_File(101);
+                    return;
+                }
+                if(!str.equals("  0") && !str.equals("  1") && !str.equals(" -1"))
+                {
+                    wrong_File(102);
+                    return;
+                }
+            }
+        }
+
+        str=fileData.get(8);
+        if(!str.equals("1") && !str.equals("-1"))
+        {
+            wrong_File(103);
+            return;
+        }
+
         int n=fileData.get(9).charAt(0)-33;
         if(n!=fileData.size()-10){
             wrong_File(106);
@@ -171,37 +202,12 @@ public class GameController{
                 cheatOn(x,y);
                 swapPlayer();
             }
-        }
-
-        String str;
-        for(int i=0;i<8;i++)
-        {
-            if(fileData.get(i).length()!=24)
-            {
-                wrong_File(101);
+            else{
+                wrong_File(105);
                 return;
             }
-            for(int j=0;j<8;j++)
-            {
-                str=fileData.get(i).substring(j*3,j*3+3);
-                if(str.equals("   "))
-                {
-                    wrong_File(101);
-                    return;
-                }
-                if(!str.equals("  0") && !str.equals("  1") && !str.equals(" -1"))
-                {
-                    wrong_File(102);
-                    return;
-                }
-            }
         }
-        str=fileData.get(8);
-        if(!str.equals("1") && !str.equals("-1"))
-        {
-            wrong_File(103);
-            return;
-        }
+
         if((currentPlayer==ChessPiece.BLACK&&!str.equals("1"))||(currentPlayer==ChessPiece.WHITE&&!str.equals("-1")))
         {
             wrong_File(107);

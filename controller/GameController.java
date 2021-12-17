@@ -72,25 +72,34 @@ public class GameController{
     }
 
     public void gameFinish(){
-        JFrame endFrame=new JFrame();
-        countScore();
-        if(blackScore>whiteScore)
-            endFrame.setTitle("BLACK WIN!");
-        else if(blackScore<whiteScore)
-            endFrame.setTitle("WHITE WIN!");
-        else
-            endFrame.setTitle("There is no winner.");
-        endFrame.setLayout(null);
-        endFrame.setSize(200,100);
-        endFrame.setLocationRelativeTo(null);
-        JButton OK=new JButton("OK");
-        OK.setSize(100,50);
-        OK.setLocation(50,10);
-        endFrame.add(OK);
-        OK.addActionListener(e->{
-            endFrame.dispose();
-        });
-        endFrame.setVisible(true);
+        if(blackScore>whiteScore){
+            JOptionPane.showMessageDialog(null,"BLACK PLAYER WIN!","GAME FINISHED",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else if(blackScore<whiteScore){
+            JOptionPane.showMessageDialog(null,"WHITE PLAYER WIN!","GAME FINISHED",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"There is no winner.","GAME FINISHED",JOptionPane.INFORMATION_MESSAGE);
+        }
+//        JFrame endFrame=new JFrame();
+//        countScore();
+//        if(blackScore>whiteScore)
+//            endFrame.setTitle("BLACK WIN!");
+//        else if(blackScore<whiteScore)
+//            endFrame.setTitle("WHITE WIN!");
+//        else
+//            endFrame.setTitle("There is no winner.");
+//        endFrame.setLayout(null);
+//        endFrame.setSize(200,100);
+//        endFrame.setLocationRelativeTo(null);
+//        JButton OK=new JButton("OK");
+//        OK.setSize(100,50);
+//        OK.setLocation(50,10);
+//        endFrame.add(OK);
+//        OK.addActionListener(e->{
+//            endFrame.dispose();
+//        });
+//        endFrame.setVisible(true);
     }
 
     public void countScore(){
@@ -299,6 +308,11 @@ public class GameController{
     }//*会刷新当前棋盘
 
     public void writeDataToFile(String fileName) {
+        if(fileName.length()<5||!fileName.substring(fileName.length() - 4).equals(".txt"))
+        {
+            wrong_File(104);
+            return;
+        }
         try
         {
             FileWriter fileWriter=new FileWriter(fileName);

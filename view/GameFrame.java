@@ -3,6 +3,7 @@ package view;
 
 import controller.GameController;
 import model.ImageValue;
+import music.MusicStuff;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,17 +13,19 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class GameFrame extends JFrame{
+    public static final JButton MUSICBTN = new JButton("Music");
     public static GameController controller;
     private ChessBoardPanel chessBoardPanel;
     private StatusPanel statusPanel;
     private MenuFrame menuFrame;
     private int gameframesize;
+    private MusicStuff musicStuff;
 
-    public GameFrame(int frameSize,MenuFrame menuFrame){
+    public GameFrame(int frameSize,MenuFrame menuFrame,MusicStuff musicStuff){
         this.menuFrame=menuFrame;
         this.gameframesize = frameSize;
-
-
+        this.musicStuff = musicStuff;
+        musicStuff.playMusic();
         this.setTitle("2021F CS102A Project Reversi");//标题
         this.setLayout(null);//设置格式布局（清空布局）
 
@@ -35,7 +38,7 @@ public class GameFrame extends JFrame{
         chessBoardPanel = new ChessBoardPanel((int) (this.getWidth() * 0.8), (int) (this.getHeight() * 0.7));
         chessBoardPanel.setLocation((this.getWidth() - chessBoardPanel.getWidth()) / 2, (this.getHeight() - chessBoardPanel.getHeight()) / 3);
 
-        statusPanel = new StatusPanel((int) (this.getWidth() * 0.8), (int) (this.getHeight() * 0.1));
+        statusPanel = new StatusPanel((int) (this.getWidth() * 0.7), (int) (this.getHeight() * 0.1));
         statusPanel.setLocation((this.getWidth() - chessBoardPanel.getWidth()) / 2, 0);
 
         controller = new GameController(chessBoardPanel, statusPanel);
@@ -96,11 +99,16 @@ public class GameFrame extends JFrame{
                 setIcon(ImageValue.loadButtonup,loadGameBtn);
             }
         });
+
         loadGameBtn.addActionListener(e -> {
             setIcon(ImageValue.loadButtonup,loadGameBtn);
-            System.out.println("clicked Load Btn");
-            String filePath = JOptionPane.showInputDialog(this, "input the path here");
-            controller.readFileData(filePath);
+            int op = JOptionPane.showConfirmDialog(this,"You will lose your chessboard data if you haven't save it.\nAre you sure to load new chessboard?","LOAD",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+            if(op == 0){
+                System.out.println("clicked Load Btn");
+                String filePath = JOptionPane.showInputDialog(this, "input the path here");
+                controller.readFileData(filePath);}
+
+
         });
 
 
@@ -248,6 +256,39 @@ public class GameFrame extends JFrame{
         });
 
 
+        JButton musicstopbtn = new JButton();
+        musicstopbtn.setOpaque(false);
+        musicstopbtn.setContentAreaFilled(false);
+        musicstopbtn.setFocusPainted(false);
+        musicstopbtn.setBorder(null);
+        musicstopbtn.setSize(50,50);
+        setIcon(ImageValue.musicstopbutton,musicstopbtn);
+        musicstopbtn.setLocation(this.getGameframesize()*9/10,this.getGameframesize()/100);
+        this.add(musicstopbtn);
+
+        JButton musicplaybtn = new JButton();
+        musicplaybtn.setOpaque(false);
+        musicplaybtn.setContentAreaFilled(false);
+        musicplaybtn.setFocusPainted(false);
+        musicplaybtn.setBorder(null);
+        musicplaybtn.setSize(50,50);
+        setIcon(ImageValue.musicplaybutton,musicplaybtn);
+        musicplaybtn.setLocation(musicstopbtn.getLocation());
+        musicplaybtn.setVisible(false);
+        this.add(musicplaybtn);
+
+        musicplaybtn.addActionListener(e -> {
+            this.musicStuff.resumeTheMusic();
+            musicplaybtn.setVisible(false);
+            musicstopbtn.setVisible(true);
+
+        });
+        musicstopbtn.addActionListener(e -> {
+            this.musicStuff.pauseTheMusic();
+            musicstopbtn.setVisible(false);
+            musicplaybtn.setVisible(true);
+        });
+
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//点击关闭时关闭
 
         this.addWindowListener(
@@ -272,10 +313,10 @@ public class GameFrame extends JFrame{
         return gameframesize;
     }
 
-    public void setIcon(ImageIcon imi,JButton com){
+    public void setIcon(ImageIcon imi,JButton button){
         ImageIcon ii = imi;
-        Image temp = ii.getImage().getScaledInstance(com.getWidth(), com.getHeight(), ii.getImage().SCALE_DEFAULT);
+        Image temp = ii.getImage().getScaledInstance(button.getWidth(), button.getHeight(), ii.getImage().SCALE_DEFAULT);
         ii = new ImageIcon(temp);
-        com.setIcon(ii);
+        button.setIcon(ii);
     }
 }

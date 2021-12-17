@@ -9,13 +9,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import model.ImageValue;
+import music.MusicStuff;
 
 public class MenuFrame extends JFrame {
 
     private int framesize;
     private GameFrame gameFrame;
-    public MenuFrame(int frameSize){
+    private MusicStuff musicStuff;
+    public MenuFrame(int frameSize,MusicStuff musicStuff){
         this.framesize = frameSize;
+        this.musicStuff = musicStuff;
         this.setTitle("Menu");
         this.setLayout(null);
 
@@ -56,6 +59,40 @@ public class MenuFrame extends JFrame {
         });
 
 
+        JButton musicstopbtn = new JButton();
+        musicstopbtn.setOpaque(false);
+        musicstopbtn.setContentAreaFilled(false);
+        musicstopbtn.setFocusPainted(false);
+        musicstopbtn.setBorder(null);
+        musicstopbtn.setSize(50,50);
+        setIcon(ImageValue.musicstopbutton,musicstopbtn);
+        musicstopbtn.setLocation((int)((this.getFramesize()-musicstopbtn.getWidth())*0.95),this.getFramesize()/100);
+        this.add(musicstopbtn);
+
+        JButton musicplaybtn = new JButton();
+        musicplaybtn.setOpaque(false);
+        musicplaybtn.setContentAreaFilled(false);
+        musicplaybtn.setFocusPainted(false);
+        musicplaybtn.setBorder(null);
+        musicplaybtn.setSize(50,50);
+        setIcon(ImageValue.musicplaybutton,musicplaybtn);
+        musicplaybtn.setLocation(musicstopbtn.getLocation());
+        musicplaybtn.setVisible(false);
+        this.add(musicplaybtn);
+
+        musicplaybtn.addActionListener(e -> {
+            this.musicStuff.resumeTheMusic();
+            musicplaybtn.setVisible(false);
+            musicstopbtn.setVisible(true);
+
+        });
+        musicstopbtn.addActionListener(e -> {
+            this.musicStuff.pauseTheMusic();
+            musicstopbtn.setVisible(false);
+            musicplaybtn.setVisible(true);
+        });
+
+
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,11 +120,11 @@ public class MenuFrame extends JFrame {
         this.gameFrame = gameFrame;
     }
 
-    public void setIcon(ImageIcon imi,JButton com){
+    public void setIcon(ImageIcon imi,JButton button){
         ImageIcon ii = imi;
-        Image temp = ii.getImage().getScaledInstance(com.getWidth(), com.getHeight(), ii.getImage().SCALE_DEFAULT);
+        Image temp = ii.getImage().getScaledInstance(button.getWidth(), button.getHeight(), ii.getImage().SCALE_DEFAULT);
         ii = new ImageIcon(temp);
-        com.setIcon(ii);
+        button.setIcon(ii);
     }
 
     public int getFramesize() {

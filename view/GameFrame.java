@@ -20,6 +20,8 @@ public class GameFrame extends JFrame{
     private MenuFrame menuFrame;
     private int gameframesize;
     private MusicStuff musicStuff;
+    private JButton musicplaybtn;
+    private JButton musicstopbtn;
 
     public GameFrame(int frameSize,MenuFrame menuFrame,MusicStuff musicStuff){
         this.menuFrame=menuFrame;
@@ -256,7 +258,7 @@ public class GameFrame extends JFrame{
         });
 
 
-        JButton musicstopbtn = new JButton();
+         musicstopbtn = new JButton();
         musicstopbtn.setOpaque(false);
         musicstopbtn.setContentAreaFilled(false);
         musicstopbtn.setFocusPainted(false);
@@ -266,7 +268,7 @@ public class GameFrame extends JFrame{
         musicstopbtn.setLocation(this.getGameframesize()*9/10,this.getGameframesize()/100);
         this.add(musicstopbtn);
 
-        JButton musicplaybtn = new JButton();
+         musicplaybtn = new JButton();
         musicplaybtn.setOpaque(false);
         musicplaybtn.setContentAreaFilled(false);
         musicplaybtn.setFocusPainted(false);
@@ -281,13 +283,19 @@ public class GameFrame extends JFrame{
             this.musicStuff.resumeTheMusic();
             musicplaybtn.setVisible(false);
             musicstopbtn.setVisible(true);
+            menuFrame.getMusicplaybtn().setVisible(false);
+            menuFrame.getMusicstopbtn().setVisible(true);
 
         });
         musicstopbtn.addActionListener(e -> {
             this.musicStuff.pauseTheMusic();
             musicstopbtn.setVisible(false);
             musicplaybtn.setVisible(true);
+            menuFrame.getMusicplaybtn().setVisible(true);
+            menuFrame.getMusicstopbtn().setVisible(false);
         });
+
+
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);//点击关闭时关闭
 
@@ -313,10 +321,20 @@ public class GameFrame extends JFrame{
         return gameframesize;
     }
 
+
+
     public void setIcon(ImageIcon imi,JButton button){
         ImageIcon ii = imi;
         Image temp = ii.getImage().getScaledInstance(button.getWidth(), button.getHeight(), ii.getImage().SCALE_DEFAULT);
         ii = new ImageIcon(temp);
         button.setIcon(ii);
+    }
+
+    public JButton getMusicplaybtn() {
+        return musicplaybtn;
+    }
+
+    public JButton getMusicstopbtn() {
+        return musicstopbtn;
     }
 }

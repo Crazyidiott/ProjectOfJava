@@ -16,6 +16,8 @@ public class MenuFrame extends JFrame {
     private int framesize;
     private GameFrame gameFrame;
     private MusicStuff musicStuff;
+    private JButton musicplaybtn;
+    private JButton musicstopbtn;
     public MenuFrame(int frameSize,MusicStuff musicStuff){
         this.framesize = frameSize;
         this.musicStuff = musicStuff;
@@ -59,7 +61,7 @@ public class MenuFrame extends JFrame {
         });
 
 
-        JButton musicstopbtn = new JButton();
+        musicstopbtn = new JButton();
         musicstopbtn.setOpaque(false);
         musicstopbtn.setContentAreaFilled(false);
         musicstopbtn.setFocusPainted(false);
@@ -69,7 +71,7 @@ public class MenuFrame extends JFrame {
         musicstopbtn.setLocation((int)((this.getFramesize()-musicstopbtn.getWidth())*0.95),this.getFramesize()/100);
         this.add(musicstopbtn);
 
-        JButton musicplaybtn = new JButton();
+        musicplaybtn = new JButton();
         musicplaybtn.setOpaque(false);
         musicplaybtn.setContentAreaFilled(false);
         musicplaybtn.setFocusPainted(false);
@@ -84,14 +86,17 @@ public class MenuFrame extends JFrame {
             this.musicStuff.resumeTheMusic();
             musicplaybtn.setVisible(false);
             musicstopbtn.setVisible(true);
+            gameFrame.getMusicplaybtn().setVisible(false);
+            gameFrame.getMusicstopbtn().setVisible(true);
 
         });
         musicstopbtn.addActionListener(e -> {
             this.musicStuff.pauseTheMusic();
             musicstopbtn.setVisible(false);
             musicplaybtn.setVisible(true);
+            gameFrame.getMusicplaybtn().setVisible(true);
+            gameFrame.getMusicstopbtn().setVisible(false);
         });
-
 
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +112,7 @@ public class MenuFrame extends JFrame {
                 });
 
     }
+
 
     public void close(){
         SecurityManager security = System.getSecurityManager();
@@ -129,5 +135,13 @@ public class MenuFrame extends JFrame {
 
     public int getFramesize() {
         return framesize;
+    }
+
+    public JButton getMusicplaybtn() {
+        return musicplaybtn;
+    }
+
+    public JButton getMusicstopbtn() {
+        return musicstopbtn;
     }
 }

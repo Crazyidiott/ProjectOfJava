@@ -8,6 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+
+import jdk.nashorn.internal.runtime.UnwarrantedOptimismException;
 import model.ImageValue;
 import music.MusicStuff;
 
@@ -31,7 +33,7 @@ public class MenuFrame extends JFrame {
 
         JButton playButton=new JButton();
 //        normalModeBtn.setText("Normal Mode");
-//        playButton.setOpaque(false);
+        playButton.setOpaque(false);
         playButton.setContentAreaFilled(false);
         playButton.setFocusPainted(false);
         playButton.setBorder(null);
@@ -59,6 +61,63 @@ public class MenuFrame extends JFrame {
             gameFrame.setVisible(true);
             this.setVisible(false);
         });
+
+        //todo playwithmachine button
+        JButton playAIbutton = new JButton("AI");
+        playAIbutton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*2/5);
+        playAIbutton.setSize(playButton.getSize());
+//        playAIbutton.setOpaque(false);
+//        playAIbutton.setContentAreaFilled(false);
+//        playAIbutton.setFocusPainted(false);
+//        playAIbutton.setBorder(null);
+//        setIcon(,);
+        this.add(playAIbutton);
+        playAIbutton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+//                setIcon();
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+//                setIcon();
+            }
+        });
+        playAIbutton.addActionListener(e -> {
+            //todo for connecting to ai playing
+        });
+
+
+        //todo instruction button
+        JButton instructionbtn = new JButton("instruction");
+        instructionbtn.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*3/5);
+        instructionbtn.setSize(playButton.getSize());
+//        instructionbtn.setOpaque(false);
+//        instructionbtn.setContentAreaFilled(false);
+//        instructionbtn.setFocusPainted(false);
+//        instructionbtn.setBorder(null);
+//        setIcon(,);
+        this.add(instructionbtn);
+        instructionbtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+//                setIcon();
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+//                setIcon();
+            }
+        });
+
+        instructionbtn.addActionListener(e -> {
+            //todo for a panel showing instructions.
+        });
+
+
+
 
 
         musicstopbtn = new JButton();

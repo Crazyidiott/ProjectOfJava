@@ -330,12 +330,12 @@ public class GameController{
 
     public void changeMode(){
         isCheat=!isCheat;
-        if(isCheat){
-            statusPanel.setModeText("Cheat");
-        }
-        else{
-            statusPanel.setModeText("Normal");
-        }
+//        if(isCheat){
+//            statusPanel.setModeText("Cheat");
+//        }
+//        else{
+//            statusPanel.setModeText("Normal");
+//        }
     }
 
     /*public void changeMode(){

@@ -38,9 +38,9 @@ public class MenuFrame extends JFrame {
         playButton.setFocusPainted(false);
         playButton.setBorder(null);
         //the order cannot be changed here
-        playButton.setSize(this.getFramesize()*2/5,this.getFramesize()/5);
+        playButton.setSize(this.getFramesize()*4/15,this.getFramesize()*2/15);
         setIcon(ImageValue.playButtonup,playButton);
-        playButton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())/5);
+        playButton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*2/5);
         this.add(playButton);
         playButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,7 +64,7 @@ public class MenuFrame extends JFrame {
 
         //todo playwithmachine button
         JButton playAIbutton = new JButton("AI");
-        playAIbutton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*2/5);
+        playAIbutton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*3/5);
         playAIbutton.setSize(playButton.getSize());
 //        playAIbutton.setOpaque(false);
 //        playAIbutton.setContentAreaFilled(false);
@@ -91,7 +91,7 @@ public class MenuFrame extends JFrame {
 
         //todo instruction button
         JButton instructionbtn = new JButton("instruction");
-        instructionbtn.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*3/5);
+        instructionbtn.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*4/5);
         instructionbtn.setSize(playButton.getSize());
 //        instructionbtn.setOpaque(false);
 //        instructionbtn.setContentAreaFilled(false);

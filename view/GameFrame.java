@@ -47,7 +47,7 @@ public class GameFrame extends JFrame{
 
         this.add(chessBoardPanel);
         this.add(statusPanel);
-//todo seticon
+
         JButton restartBtn = new JButton();//创建一个重新开始按钮
         restartBtn.setOpaque(false);
         restartBtn.setContentAreaFilled(false);
@@ -70,12 +70,12 @@ public class GameFrame extends JFrame{
                 setIcon(ImageValue.restartButtonup,restartBtn);
             }
         });
-
-        restartBtn.addActionListener(e -> {
-            setIcon(ImageValue.restartButtonup,restartBtn);
-            controller.reStart();
-            System.out.println("click restart Btn");
-        });
+//这段移到后边去了，加了个让changemode按钮变回normal的语句
+//        restartBtn.addActionListener(e -> {
+//            setIcon(ImageValue.restartButtonup,restartBtn);
+//            controller.reStart();
+//            System.out.println("click restart Btn");
+//        });
 
 
 
@@ -110,7 +110,6 @@ public class GameFrame extends JFrame{
                 String filePath = JOptionPane.showInputDialog(this, "input the path here");
                 controller.readFileData(filePath);}
 
-
         });
 
 
@@ -139,6 +138,7 @@ public class GameFrame extends JFrame{
         saveGameBtn.addActionListener(e -> {
             setIcon(ImageValue.saveButtonup,saveGameBtn);
             System.out.println("clicked Save Btn");
+            JOptionPane.showMessageDialog(this,"Your path must be ended with .txt, otherwise you can't save your board.","Tips",JOptionPane.INFORMATION_MESSAGE);
             String filePath = JOptionPane.showInputDialog(this, "input the path here","SAVE",JOptionPane.INFORMATION_MESSAGE);
             controller.writeDataToFile(filePath);
 
@@ -218,6 +218,13 @@ public class GameFrame extends JFrame{
             if(!controller.isCheating()){
                 setIcon(ImageValue.normalButtonup,changeModeBtn);
             }
+        });
+
+        restartBtn.addActionListener(e -> {
+            setIcon(ImageValue.restartButtonup,restartBtn);
+            controller.reStart();
+            setIcon(ImageValue.normalButtonup,changeModeBtn);
+            System.out.println("click restart Btn");
         });
 
 

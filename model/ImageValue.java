@@ -25,6 +25,9 @@ public class ImageValue {
     public static ImageIcon cheatButtondown = null;
     public static ImageIcon backButtonup = null;
     public static ImageIcon backButtondown = null;
+    public static ImageIcon musicplaybutton = null;
+    public static ImageIcon musicstopbutton = null;
+
 
 
     private static String Path = "/ImageChess/";
@@ -52,7 +55,8 @@ public class ImageValue {
 
             backButtonup = new ImageIcon("src/" + Path + "backbuttonup.png");
             backButtondown = new ImageIcon("src/" + Path + "backbuttondown.png");
-
+            musicplaybutton = new ImageIcon("src/" + Path + "musicunplay.png");
+            musicstopbutton = new ImageIcon("src/" + Path + "musiconplay.png");
 
         } catch (Exception e) {
             e.printStackTrace();

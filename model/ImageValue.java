@@ -27,8 +27,15 @@ public class ImageValue {
     public static ImageIcon backButtondown = null;
     public static ImageIcon musicplaybutton = null;
     public static ImageIcon musicstopbutton = null;
-
-
+    public static ImageIcon background  =null;
+    public static ImageIcon bgpic  =null;
+    public static ImageIcon backgroundtest  =null;
+    public static ImageIcon statespanelbg = null;
+    public static ImageIcon instructionbtnup = null;
+    public static ImageIcon instructionbtndown = null;
+    public static ImageIcon VScomup = null;
+    public static ImageIcon VScomdown = null;
+    public static ImageIcon gametitle = null;
 
     private static String Path = "/ImageChess/";
 
@@ -57,7 +64,15 @@ public class ImageValue {
             backButtondown = new ImageIcon("src/" + Path + "backbuttondown.png");
             musicplaybutton = new ImageIcon("src/" + Path + "musicunplay.png");
             musicstopbutton = new ImageIcon("src/" + Path + "musiconplay.png");
-
+            background =new ImageIcon("src/"+Path+"bgmenu.jfif");
+            bgpic =new ImageIcon("src/"+Path+"bgpic.png");
+            backgroundtest = new ImageIcon("src/"+Path+"backgroundtest.jfif");
+            statespanelbg = new ImageIcon("src/"+Path+"statuspanelbg.png");
+            instructionbtnup = new ImageIcon("src/"+Path+"instructionbtnup.png");
+            instructionbtndown = new ImageIcon("src/"+Path+"instructionbtndown.png");
+            VScomdown =new ImageIcon("src/"+Path+"VScomdown1.png");
+            VScomup =new ImageIcon("src/"+Path+"VScomup1.png");
+            gametitle =new ImageIcon("src/"+Path+"gametitle.png");
         } catch (Exception e) {
             e.printStackTrace();
         }

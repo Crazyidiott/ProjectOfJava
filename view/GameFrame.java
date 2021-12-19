@@ -22,8 +22,10 @@ public class GameFrame extends JFrame{
     private MusicStuff musicStuff;
     private JButton musicplaybtn;
     private JButton musicstopbtn;
+    private JPanel jpane;
 
     public GameFrame(int frameSize,MenuFrame menuFrame,MusicStuff musicStuff){
+        this.getContentPane().setBackground(new Color(105, 94, 29));
         this.menuFrame=menuFrame;
         this.gameframesize = frameSize;
         this.musicStuff = musicStuff;
@@ -36,6 +38,16 @@ public class GameFrame extends JFrame{
         this.setSize(frameSize + inset.left + inset.right, frameSize + inset.top + inset.bottom);
 
         this.setLocationRelativeTo(null);//窗口至于屏幕中央
+
+        JLabel bg = new JLabel();
+        bg.setSize(this.getWidth(),this.getHeight());
+        setIcon(ImageValue.backgroundtest,bg);
+        JPanel pan = (JPanel) this.getContentPane();
+        this.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+        pan.setOpaque(false);
+        pan.setLayout(null);
+
+
 
         chessBoardPanel = new ChessBoardPanel((int) (this.getWidth() * 0.8), (int) (this.getHeight() * 0.7));
         chessBoardPanel.setLocation((this.getWidth() - chessBoardPanel.getWidth()) / 2, (this.getHeight() - chessBoardPanel.getHeight()) / 3);
@@ -335,6 +347,13 @@ public class GameFrame extends JFrame{
         Image temp = ii.getImage().getScaledInstance(button.getWidth(), button.getHeight(), ii.getImage().SCALE_DEFAULT);
         ii = new ImageIcon(temp);
         button.setIcon(ii);
+    }
+
+    public void setIcon(ImageIcon imi,JLabel label){
+        ImageIcon ii = imi;
+        Image temp = ii.getImage().getScaledInstance(label.getWidth(),label.getHeight(), ii.getImage().SCALE_DEFAULT);
+        ii = new ImageIcon(temp);
+        label.setIcon(ii);
     }
 
     public JButton getMusicplaybtn() {

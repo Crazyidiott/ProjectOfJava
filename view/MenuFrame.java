@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import jdk.nashorn.internal.runtime.UnwarrantedOptimismException;
 import model.ImageValue;
 import music.MusicStuff;
 
@@ -31,6 +30,26 @@ public class MenuFrame extends JFrame {
 
         this.setLocationRelativeTo(null);
 
+
+
+        JLabel bg = new JLabel();
+        bg.setSize(this.getWidth(),this.getHeight());
+        setIcon(ImageValue.background,bg);
+        JPanel pan = (JPanel) this.getContentPane();
+        this.getLayeredPane().add(bg,new Integer(Integer.MIN_VALUE));
+        pan.setOpaque(false);
+        pan.setLayout(null);
+
+        JLabel gametitle = new JLabel();
+        gametitle.setBorder(null);
+        gametitle.setOpaque(false);
+        gametitle.setSize(this.getFramesize()*5/15,this.getFramesize()*5/15);
+        gametitle.setLocation((this.getFramesize()-(gametitle.getWidth()))/2,(this.getFramesize()-gametitle.getHeight())/50);
+        setIcon(ImageValue.gametitle,gametitle);
+        gametitle.setVisible(true);
+        this.add(gametitle);
+
+
         JButton playButton=new JButton();
 //        normalModeBtn.setText("Normal Mode");
         playButton.setOpaque(false);
@@ -40,13 +59,12 @@ public class MenuFrame extends JFrame {
         //the order cannot be changed here
         playButton.setSize(this.getFramesize()*4/15,this.getFramesize()*2/15);
         setIcon(ImageValue.playButtonup,playButton);
-        playButton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*2/5);
-        this.add(playButton);
+        playButton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*7/15);
+        pan.add(playButton);
         playButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-//                System.out.println("233");
                 setIcon(ImageValue.playButtondown,playButton);
             }
             @Override
@@ -63,25 +81,25 @@ public class MenuFrame extends JFrame {
         });
 
         //todo playwithmachine button
-        JButton playAIbutton = new JButton("AI");
-        playAIbutton.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*3/5);
+        JButton playAIbutton = new JButton();
+        playAIbutton.setLocation(playButton.getX(),(this.getFramesize()-playButton.getHeight())*10/15);
         playAIbutton.setSize(playButton.getSize());
-//        playAIbutton.setOpaque(false);
-//        playAIbutton.setContentAreaFilled(false);
-//        playAIbutton.setFocusPainted(false);
-//        playAIbutton.setBorder(null);
-//        setIcon(,);
-        this.add(playAIbutton);
+        playAIbutton.setOpaque(false);
+        playAIbutton.setContentAreaFilled(false);
+        playAIbutton.setFocusPainted(false);
+        playAIbutton.setBorder(null);
+        setIcon(ImageValue.VScomup,playAIbutton);
+        pan.add(playAIbutton);
         playAIbutton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-//                setIcon();
+                setIcon(ImageValue.VScomdown,playAIbutton);
             }
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-//                setIcon();
+                setIcon(ImageValue.VScomup,playAIbutton);
             }
         });
         playAIbutton.addActionListener(e -> {
@@ -90,30 +108,32 @@ public class MenuFrame extends JFrame {
 
 
         //todo instruction button
-        JButton instructionbtn = new JButton("instruction");
-        instructionbtn.setLocation((this.getFramesize()-(playButton.getWidth()))/2,(this.getFramesize()-playButton.getHeight())*4/5);
+        JButton instructionbtn = new JButton();
+        instructionbtn.setLocation(playButton.getX(),(this.getFramesize()-playButton.getHeight())*13/15);
         instructionbtn.setSize(playButton.getSize());
-//        instructionbtn.setOpaque(false);
-//        instructionbtn.setContentAreaFilled(false);
-//        instructionbtn.setFocusPainted(false);
-//        instructionbtn.setBorder(null);
-//        setIcon(,);
-        this.add(instructionbtn);
+        instructionbtn.setOpaque(false);
+        instructionbtn.setContentAreaFilled(false);
+        instructionbtn.setFocusPainted(false);
+        instructionbtn.setBorder(null);
+        setIcon(ImageValue.instructionbtnup,instructionbtn);
+        pan.add(instructionbtn);
         instructionbtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
-//                setIcon();
+                setIcon(ImageValue.instructionbtndown,instructionbtn);
+
             }
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-//                setIcon();
+                setIcon(ImageValue.instructionbtnup,instructionbtn);
             }
         });
 
         instructionbtn.addActionListener(e -> {
             //todo for a panel showing instructions.
+            new InstructionFrame();
         });
 
 
@@ -183,6 +203,13 @@ public class MenuFrame extends JFrame {
     public void setGameFrame(GameFrame gameFrame)
     {
         this.gameFrame = gameFrame;
+    }
+
+    public void setIcon(ImageIcon imi,JLabel label){
+        ImageIcon ii = imi;
+        Image temp = ii.getImage().getScaledInstance(label.getWidth(),label.getHeight(), ii.getImage().SCALE_DEFAULT);
+        ii = new ImageIcon(temp);
+        label.setIcon(ii);
     }
 
     public void setIcon(ImageIcon imi,JButton button){

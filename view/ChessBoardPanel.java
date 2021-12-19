@@ -16,7 +16,7 @@ public class ChessBoardPanel extends JPanel{//继承
         this.setVisible(true);
         this.setFocusable(true);//可以被操作，指点击？
         this.setLayout(null);
-        this.setBackground(Color.BLACK);
+        this.setBackground(new Color(255, 255, 255));
         int length = Math.min(width, height);
         this.setSize(length, length);
         ChessGridComponent.gridSize = length / CHESS_COUNT;

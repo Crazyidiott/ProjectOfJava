@@ -1,6 +1,7 @@
 package view;
 //设置上方初始状态
 import model.ChessPiece;
+import model.ImageValue;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,15 +14,16 @@ public class StatusPanel extends JPanel{
     public StatusPanel(int width, int height){//初始化
         this.setSize(width, height);
         this.setLayout(null);
+        this.setOpaque(false);
+        this.setBorder(null);
         this.setVisible(true);
-
         this.playerLabel = new JLabel();
-        this.playerLabel.setLocation(0, 10);
+        this.playerLabel.setLocation(35, 5);
         this.playerLabel.setSize((int) (width * 0.4), height);
         this.playerLabel.setFont(new Font("Calibri", Font.BOLD, 30));//字体，风格，字号
 
         this.scoreLabel = new JLabel();
-        this.scoreLabel.setLocation((int) (width * 0.4), 10);
+        this.scoreLabel.setLocation((int) (width * 0.4)+this.playerLabel.getX(), this.playerLabel.getY());
         this.scoreLabel.setSize((int) (width * 0.5), height);
         this.scoreLabel.setFont(new Font("Calibri", Font.ITALIC, 25));
 
@@ -54,5 +56,10 @@ public class StatusPanel extends JPanel{
     public void isCheating(){
         this.playerLabel.setText("Cheat Mode");
         this.scoreLabel.setText("Cheat Mode");
+    }
+
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        g.drawImage(ImageValue.statespanelbg.getImage(),0,0,this.getWidth(),this.getHeight(),this);
     }
 }

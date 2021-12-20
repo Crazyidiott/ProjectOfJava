@@ -1,11 +1,24 @@
 [Rules]
 
-1. The game begins with four disks placed in a square in the middle of the grid, two facing white-side-up, two dark-side-up, so that the same-colored disks are on a diagonal. Convention has this such that the dark-side-up disks are to the north east and south-west. The dark player moves first.
+1. The game begins with four disks placed in a square in the middle of the grid,
+ two facing white-side-up, two dark-side-up, so that the same-colored disks are
+ on a diagonal. Convention has this such that the dark-side-up disks are to the
+ north east and south-west.The dark player moves first.
 
-2. Play always alternates. After placing a dark disk, dark turns over (flips to dark, captures) the single disk (or chain of light disks) on the line between the new piece and an anchoring dark piece. No player can look back to the previous status of disks when playing moves. A valid move is one where at least one piece is reversed (flipped over). 
+2. Play always alternates. After placing a dark disk, dark turns over (flips to
+ dark, captures) the single disk (or chain of light disks) on the line between the
+ new piece and an anchoring dark piece. No player can look back to the previous
+ status of disks when playing moves.A valid move is one where at least one piece
+ is reversed (flipped over).
 
-3. Now light plays. This player operates under the same rules, with the roles reversed: light lays down a light piece, causing a dark piece to flip.
+3. Now light plays. This player operates under the same rules, with the roles
+ reversed: light lays down a light piece, causing a dark piece to flip.
 
-4. Players take alternate turns. If one player can not make a valid move, play passes back to the other player. When neither player can move, the game ends. This occurs when the grid has filled up or when neither player can legally place a piece in any of the remaining squares. This means the game may end before the grid is completely filled. This possibility may occur because one player has no pieces remaining on the board in that player's color.
+4. Players take alternate turns. If one player can not make a valid move, play
+ passes back to the other player.When neither player can move, the game ends.
+ This occurs when the grid has filled up or when neither player can legally place
+ a piece in any of the remaining squares. This means the game may end before the
+ grid is completely filled. This possibility may occur because one player has no
+ pieces remaining on the board in that player's color.
 
 5. The player with the most pieces on the board at the end of the game wins.

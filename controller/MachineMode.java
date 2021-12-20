@@ -3,14 +3,14 @@ package controller;
 public class MachineMode
 {
     private static final int[][] boardVal={
-            {9,0,7,5,5,7,0,9},
-            {0,0,6,4,4,6,0,0},
+            {100,-50,7,5,5,7,-50,100},
+            {-50,-50,6,4,4,6,-50,-50},
             {7,6,5,3,3,5,6,7},
             {5,4,3,2,2,3,4,5},
             {5,4,3,2,2,3,4,5},
             {7,6,5,3,3,5,6,7},
-            {0,0,6,4,4,6,0,0},
-            {9,0,7,5,5,7,0,9}};
+            {-50,-50,6,4,4,6,-50,-50},
+            {100,-50,7,5,5,7,-50,100}};
     //black:1 white:-1
     private static int toSearch;
 
@@ -85,17 +85,15 @@ public class MachineMode
                         }
                     }
             }
-        return (double)(blackSpace/whiteSpace)*100+chessBoardVal;
+        return (double)(blackSpace/(whiteSpace+0.001))*70+chessBoardVal;
     }
     private static double tryOn(int[][] chessBoard,int row,int col,int currentPlayer,int steps){
-        System.out.println(row+" "+col+" "+currentPlayer+" "+steps);
         if(steps==0)
         {
-            System.out.println(row+" "+col);
             return val(chessBoard);
         }
         int k;
-        double ans=0;
+        double ans=-10000*currentPlayer;
         boolean flag=false;
         for(int i=-1;i<=1;i++)
             for(int j=-1;j<=1;j++)
@@ -136,27 +134,27 @@ public class MachineMode
     }
     public static int workOn(int[][] chessBoard,int currentPlayer){
         int row=0,col=0;
-        double an=0;
-        /*for(int i=0;i<8;i++)
+        double an=-10000*currentPlayer;
+        for(int i=0;i<8;i++)
             for(int j=0;j<8;j++)
                 if(chessBoard[i][j]==0)
                 {
                     double ret=tryOn(chessBoard,i,j,currentPlayer,toSearch);
-                    if(currentPlayer==1&&ret>an)
+                    if(currentPlayer==1&&ret>=an)
                     {
                         an=ret;
                         row=i;
                         col=j;
                     }
-                    if(currentPlayer==-1&&ret<an)
+                    if(currentPlayer==-1&&ret<=an)
                     {
                         an=ret;
                         row=i;
                         col=j;
                     }
                 }
-        return row*10+col;*/
-        int k;
+        return row*10+col;
+        /*int k;
         for(int i=0;i<8;i++)
             for(int j=0;j<8;j++)
             {
@@ -187,6 +185,6 @@ public class MachineMode
                     }
             }
         System.out.println("gaga");
-        return 0;
+        return 0;*/
     }
 }

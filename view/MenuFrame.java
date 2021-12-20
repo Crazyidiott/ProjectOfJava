@@ -8,6 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.ImageValue;
 import music.MusicStuff;
@@ -133,7 +138,26 @@ public class MenuFrame extends JFrame {
 
         instructionbtn.addActionListener(e -> {
             //todo for a panel showing instructions.
-            new InstructionFrame();
+//            new InstructionFrame();
+            List<String> fileData = new ArrayList<>();
+            try {
+                FileReader fileReader = new FileReader("Rules.txt");
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    fileData.add(line);
+                }
+                bufferedReader.close();
+                fileReader.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            String kk = "";
+            for(String str:fileData){
+                kk = kk + str + "\n";
+            }
+
+            JOptionPane.showMessageDialog(null,kk,"rules",JOptionPane.INFORMATION_MESSAGE);
         });
 
 

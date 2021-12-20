@@ -44,7 +44,7 @@ public class StatusPanel extends JPanel{
     }
 
     public void setScoreText(int black, int white){//更改分数
-        this.scoreLabel.setText(String.format("BLACK: %d     WHITE: %d", black, white));
+        this.scoreLabel.setText(String.format("BLACK: %d  WHITE: %d", black, white));
     }
     //更改至此人下棋
     public void setPlayerText(String playerText){

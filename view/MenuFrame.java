@@ -115,16 +115,28 @@ public class MenuFrame extends JFrame {
             gameFrame.setVisible(true);
             this.setVisible(false);
             JFrame chframe=new JFrame("Choose you color");
-            chframe.setSize(400,300);
+            chframe.setSize(300,200);
             chframe.setLayout(null);
             chframe.setLocationRelativeTo(null);
             chframe.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
             chframe.setVisible(true);
 
+            JLabel bgg = new JLabel();
+            bgg.setSize(chframe.getWidth(),chframe.getHeight());
+            setIcon(ImageValue.backgroundtest,bgg);
+            JPanel pann = (JPanel)chframe.getContentPane();
+//        this.setContentPane(pan);
+           chframe.getLayeredPane().add(bgg,new Integer(Integer.MIN_VALUE));
+            pann.setOpaque(false);
+            pann.setLayout(null);
+
             JButton blackBtn=new JButton();
-            blackBtn.setText("BLACK");
-            blackBtn.setSize(120,50);
-            blackBtn.setLocation(50,125);
+            blackBtn.setOpaque(false);
+            blackBtn.setContentAreaFilled(false);
+            blackBtn.setBorder(null);
+            blackBtn.setSize(100,100);
+            setIcon(ImageValue.blackchess,blackBtn);
+            blackBtn.setLocation((chframe.getWidth()-2*blackBtn.getWidth())/3,(chframe.getHeight()-blackBtn.getHeight())/3);
             blackBtn.addActionListener(ee->{
                 GameFrame.controller.setMechineColor(ChessPiece.WHITE);
                 GameFrame.controller.playMechineMode();
@@ -134,9 +146,12 @@ public class MenuFrame extends JFrame {
             chframe.add(blackBtn);
 
             JButton whiteBtn=new JButton();
-            whiteBtn.setText("WHITE");
-            whiteBtn.setSize(120,50);
-            whiteBtn.setLocation(230,125);
+            whiteBtn.setOpaque(false);
+            whiteBtn.setBorder(null);
+            whiteBtn.setContentAreaFilled(false);
+            whiteBtn.setSize(100,100);
+            setIcon(ImageValue.whitechess,whiteBtn);
+            whiteBtn.setLocation((chframe.getWidth()-(chframe.getWidth()-2*blackBtn.getWidth()))*3/4,blackBtn.getY());
             whiteBtn.addActionListener(ee->{
                 GameFrame.controller.setMechineColor(ChessPiece.BLACK);
                 GameFrame.controller.playMechineMode();

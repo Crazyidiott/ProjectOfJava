@@ -3,6 +3,7 @@ package components;
 import controller.GameController;
 import model.*;
 import view.GameFrame;
+import controller.MachineMode;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,6 +37,28 @@ public class ChessGridComponent extends BasicComponent{
         {
             GameFrame.controller.change(row, col);
             GameFrame.controller.swapPlayer();
+        }
+        else
+        {
+            return;
+        }
+        System.out.println("hhh");
+        if(GameFrame.controller.mechineMode())
+        {
+            while(GameFrame.controller.getCurrentPlayer()==GameFrame.controller.getMechineColor())
+            {
+                System.out.println("rjx");
+                /*try {
+                    Thread.sleep(1000);
+                } catch (Exception e){
+                    System.exit(0);
+                }*/
+                int rt = MachineMode.workOn(GameFrame.controller.getGamePanel().toInt(), (GameFrame.controller.getMechineColor() == ChessPiece.BLACK ? 1 : -1));
+                System.out.println(rt);
+                GameFrame.controller.paint();
+                GameFrame.controller.change(rt / 10, rt % 10);
+                GameFrame.controller.swapPlayer();
+            }
         }
     }
 

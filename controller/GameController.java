@@ -22,12 +22,14 @@ public class GameController{
     private int whiteScore;
     private List<String> process;
     private boolean isCheat;
+    private boolean isMechineMode;
+    private ChessPiece mechineColor;
     private ChessPiece PossibleMoves;
 
     public GameController(ChessBoardPanel gamePanel, StatusPanel statusPanel) {//初始化
         this.gamePanel = gamePanel;
         this.statusPanel = statusPanel;
-
+        this.isMechineMode=false;
         reStart();
 
     }
@@ -72,6 +74,8 @@ public class GameController{
     }
 
     public void gameFinish(){
+        currentPlayer=null;
+        gamePanel.clear();
         if(blackScore>whiteScore){
             JOptionPane.showMessageDialog(null,"BLACK PLAYER WIN!","GAME FINISHED",JOptionPane.INFORMATION_MESSAGE);
         }
@@ -435,6 +439,30 @@ public class GameController{
         }
     }
 
+    public boolean mechineMode(){
+        return isMechineMode;
+    }
+
+    public void setMechineColor(ChessPiece mechineColor){
+        this.mechineColor=mechineColor;
+    }
+
+    public ChessPiece getMechineColor(){
+        return this.mechineColor;
+    }
+
+    public void playMechineMode(){
+       isMechineMode=true;
+    }
+
+    public void playNormalMode(){
+        isMechineMode=false;
+    }
+
+    public void paint(){
+        gamePanel.repaint();
+        statusPanel.repaint();
+    }
 }
 
 

@@ -13,7 +13,7 @@ public class Main{
          SwingUtilities.invokeLater(() -> {
             MenuFrame menuFrame = new MenuFrame(500,musicstuff);
             menuFrame.setVisible(true);
-            GameFrame gameFrame=new GameFrame(700,menuFrame,musicstuff);
+            GameFrame gameFrame=new GameFrame(800,menuFrame,musicstuff);
             gameFrame.setVisible(false);
             menuFrame.setGameFrame(gameFrame);
         });

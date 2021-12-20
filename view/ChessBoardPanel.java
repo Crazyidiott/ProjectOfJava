@@ -207,8 +207,7 @@ public class ChessBoardPanel extends JPanel{//继承
 
     @Override
     //以1，-1, 0 表示棋盘
-    public String toString()
-    {
+    public String toString(){
         String ret="";
         for(int i = 0; i < CHESS_COUNT; i++)
         {
@@ -223,6 +222,21 @@ public class ChessBoardPanel extends JPanel{//继承
             }
             ret=ret+"\n";
         }
+        return ret;
+    }
+
+    public int[][] toInt(){
+        int[][] ret=new int[8][8];
+        for(int i=0;i<8;i++)
+            for(int j=0;j<8;j++)
+            {
+                if(chessGrids[i][j].getChessPiece()==ChessPiece.BLACK)
+                    ret[i][j]=1;
+                else if(chessGrids[i][j].getChessPiece()==ChessPiece.WHITE)
+                    ret[i][j]=-1;
+                else
+                    ret[i][j]=0;
+            }
         return ret;
     }
 }

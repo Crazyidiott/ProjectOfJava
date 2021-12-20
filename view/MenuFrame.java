@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.ChessPiece;
 import model.ImageValue;
 import music.MusicStuff;
+import controller.MachineMode;
 
 public class MenuFrame extends JFrame {
 
@@ -83,6 +85,7 @@ public class MenuFrame extends JFrame {
             GameFrame.controller.reStart();
             gameFrame.setVisible(true);
             this.setVisible(false);
+            GameFrame.controller.playNormalMode();
         });
 
         //todo playwithmachine button
@@ -108,7 +111,41 @@ public class MenuFrame extends JFrame {
             }
         });
         playAIbutton.addActionListener(e -> {
-            //todo for connecting to ai playing
+            GameFrame.controller.reStart();
+            gameFrame.setVisible(true);
+            this.setVisible(false);
+            JFrame chframe=new JFrame("Choose you color");
+            chframe.setSize(400,300);
+            chframe.setLayout(null);
+            chframe.setLocationRelativeTo(null);
+            chframe.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+            chframe.setVisible(true);
+
+            JButton blackBtn=new JButton();
+            blackBtn.setText("BLACK");
+            blackBtn.setSize(120,50);
+            blackBtn.setLocation(50,125);
+            blackBtn.addActionListener(ee->{
+                GameFrame.controller.setMechineColor(ChessPiece.WHITE);
+                GameFrame.controller.playMechineMode();
+                MachineMode.setToSearch(3);
+                chframe.dispose();
+            });
+            chframe.add(blackBtn);
+
+            JButton whiteBtn=new JButton();
+            whiteBtn.setText("WHITE");
+            whiteBtn.setSize(120,50);
+            whiteBtn.setLocation(230,125);
+            whiteBtn.addActionListener(ee->{
+                GameFrame.controller.setMechineColor(ChessPiece.BLACK);
+                GameFrame.controller.playMechineMode();
+                GameFrame.controller.change(2,3);
+                GameFrame.controller.swapPlayer();
+                MachineMode.setToSearch(3);
+                chframe.dispose();
+            });
+            chframe.add(whiteBtn);
         });
 
 
@@ -138,7 +175,6 @@ public class MenuFrame extends JFrame {
 
         instructionbtn.addActionListener(e -> {
             //todo for a panel showing instructions.
-//            new InstructionFrame();
             List<String> fileData = new ArrayList<>();
             try {
                 FileReader fileReader = new FileReader("Rules.txt");
